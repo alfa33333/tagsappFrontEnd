@@ -1,16 +1,21 @@
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 import './index.css'
+import CssBaseline from '@mui/material/CssBaseline';
+import ResponsiveAppBar from './components/navbar.jsx';
+
 
 function App() {
 
   return (
-    <div className="app-container">
-      {" "}
-      <h1>Tags app</h1>
-
-
-      
-    </div>
-  )
+    <>
+      <CssBaseline />
+      <ResponsiveAppBar />
+    </>
+  );
 }
 
 export default App
