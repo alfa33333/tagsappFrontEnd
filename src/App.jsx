@@ -6,6 +6,7 @@ import '@fontsource/roboto/700.css';
 import './index.css'
 import CssBaseline from '@mui/material/CssBaseline';
 import ResponsiveAppBar from './components/navbar.jsx';
+import ActionBody from './components/ActionBody.jsx';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <>
       <CssBaseline />
       <ResponsiveAppBar />
+      <ActionBody />
     </>
   );
 }
