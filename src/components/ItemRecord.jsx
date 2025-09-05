@@ -35,7 +35,7 @@ function CardItem({ itemData }) {
 
 const baseApiUrl = "https://localhost:5001";
 
-async function getExampleItem(setItemData) {
+function getExampleItem(setItemData) {
   fetch(baseApiUrl + `/api/items/04:55:70:D2:22:6D:80`)
     .then((response) => {
       if (response.status === 404) {
