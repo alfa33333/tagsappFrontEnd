@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 
-function CardItem({ onShowDetails }) {
+function CardItem({ tagID, onShowDetails }) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -18,7 +18,7 @@ function CardItem({ onShowDetails }) {
           Tag ID
         </Typography>
         <Typography variant="h5" component="div">
-          555555555
+          {tagID}
         </Typography>
       </CardContent>
       <CardActions>
@@ -28,17 +28,46 @@ function CardItem({ onShowDetails }) {
   );
 }
 
-const exampleData = {
-  id: '555555555',
-  name: 'Tony',
-  description: 'Software Engineer',
-  status: 'available',
-  owner: '',
-  cert: 'none'
-};
+const baseApiUrl = "https://localhost:5001";
+
+async function getExampleItem(setItemData) {
+  fetch(baseApiUrl + `/api/items/04:55:70:D2:22:6D:80`)
+    .then((response) => {
+      if (response.status === 404) {
+        console.log('No data found');
+        return null; // Handle 404 case
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Process the data as needed
+        if (data) {
+        setItemData(data);
+        // console.log('Fetched data:', data);
+      }
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+        setItemData({}); // Set to empty object on error
+    });
+}
+
+// const exampleData = {
+//   id: '555555555',
+//   name: 'Tony',
+//   description: 'Software Engineer',
+//   status: 'available',
+//   owner: '',
+//   cert: 'none'
+// };
 
 function TagRecord() {
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
+  const [itemData, setItemData] = React.useState({});
+
+  React.useEffect(() => {
+    getExampleItem(setItemData);
+  }, []);
 
   const handleExpand = () => setExpanded(!expanded);
   const handleAccordionChange = (event) => setExpanded(event.target.value);
@@ -49,11 +78,11 @@ function TagRecord() {
         expanded={expanded} 
         onChange={handleAccordionChange}
       >
-        <CardItem onShowDetails={handleExpand} />
+        <CardItem tagID={itemData.rfid_tag} onShowDetails={handleExpand} />
         <AccordionDetails>
             {
-                Object.entries(exampleData).map(([key, value]) => {
-                    if (key === 'id') {
+                Object.entries(itemData).map(([key, value]) => {
+                    if (key === 'id' || key === 'rfid_tag') {
                         return null; // Skip rendering the 'id' field
                     } else {return (
                     <React.Fragment key={key}>
