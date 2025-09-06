@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 
 function CardItem({ itemData }) {
+  const handleValueClick = (value) => {
+    console.log(value);
+  };
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -23,7 +21,13 @@ function CardItem({ itemData }) {
                 <Typography variant="h6" gutterBottom>
                   {key.charAt(0).toUpperCase() + key.slice(1)}
                 </Typography>
-                <Typography gutterBottom>{value}</Typography>
+                <Typography
+                  gutterBottom
+                  sx={{ cursor: "pointer", color: "primary.main" }}
+                  onClick={() => handleValueClick(value)}
+                >
+                  {value}
+                </Typography>
               </React.Fragment>
             );
           }
@@ -33,40 +37,10 @@ function CardItem({ itemData }) {
   );
 }
 
-const baseApiUrl = "https://localhost:5001";
-
-function getExampleItem(setItemData) {
-  fetch(baseApiUrl + `/api/items/04:55:70:D2:22:6D:80`)
-    .then((response) => {
-      if (response.status === 404) {
-        console.log("No data found");
-        return null; // Handle 404 case
-      }
-      return response.json();
-    })
-    .then((data) => {
-      // Process the data as needed
-      if (data) {
-        setItemData(data);
-        // console.log('Fetched data:', data);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      setItemData({}); // Set to empty object on error
-    });
-}
-
-function TagRecord() {
-  const [itemData, setItemData] = React.useState({});
-
-  React.useEffect(() => {
-    getExampleItem(setItemData);
-  }, []);
-
+function TagRecord({ itemData }) {
   return (
     <Box>
-        <CardItem itemData={itemData} />
+      <CardItem itemData={itemData} />
     </Box>
   );
 }
