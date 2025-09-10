@@ -5,8 +5,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 function CardItem({ itemData }) {
-  const handleValueClick = (value) => {
-    console.log(value);
+  const handleValueClick = (key, value) => {
+    console.log(`Property clicked: ${key}=${value}`);
   };
 
   return (
@@ -24,7 +24,7 @@ function CardItem({ itemData }) {
                 <Typography
                   gutterBottom
                   sx={{ cursor: "pointer", color: "primary.main" }}
-                  onClick={() => handleValueClick(value)}
+                  onClick={() => handleValueClick(key, value)}
                 >
                   {value}
                 </Typography>
