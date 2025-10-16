@@ -7,6 +7,7 @@ import './index.css'
 import CssBaseline from '@mui/material/CssBaseline';
 import ResponsiveAppBar from './components/navbar.jsx';
 import ActionBody from './components/ActionBody.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <>
       <CssBaseline />
       <ResponsiveAppBar />
+      <Dashboard />
     </>
   );
 }
