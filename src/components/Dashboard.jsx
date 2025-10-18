@@ -8,6 +8,22 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CounterArea from './CounterArea';
 import ChartArea from './ChartArea';
 
+const baseApiUrl = "https://localhost:5001";
+
+function fetchDashboardData(setData, api){
+  fetch(`${baseApiUrl}${api}`)
+    .then(response => response.json())
+    .then(data => {
+      // Process and return the dashboard data
+      console.log(data);
+      setData(data);
+    })
+    .catch(error => {
+      console.error("Error fetching dashboard data:", error);
+      throw error;
+    });
+}
+
 /**
  * Dashboard scaffold
  * - Add real data, charts and widgets as needed.
@@ -15,6 +31,15 @@ import ChartArea from './ChartArea';
  */
 
 export default function Dashboard({ loading = false, stats = {}, children }) {
+  const [statsData, setStatsData] = React.useState({});
+  const [retailersData, setRetailersData] = React.useState([]);
+
+  React.useEffect(
+  ()=> {
+    fetchDashboardData(setStatsData, "/api/demo/summary");
+    fetchDashboardData(setRetailersData, "/api/retailers");
+  }, [] );
+
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box mb={3}>
@@ -29,7 +54,7 @@ export default function Dashboard({ loading = false, stats = {}, children }) {
       ) : (
         <Grid container spacing={3}>
           {/* Small stat cards */}
-          <CounterArea loading={loading} stats={stats} />
+          <CounterArea loading={loading} stats={statsData} />
 
           {/* Charts / larger widgets */}
           <ChartArea loading={loading} stats={stats} />
