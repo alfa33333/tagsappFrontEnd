@@ -1,0 +1,147 @@
+/* Style for input fields on dashboard pages */
+input[type="text"] {
+  border-radius: 8px;
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 1em;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+}
+button:hover {
+  background: #ffb300;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(255, 179, 0, 0.15);
+}
+button:active {
+  background: #ff8800;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(255, 136, 0, 0.18);
+}
+
+/* Responsive Card Styles */
+.card {
+  background: #fff;
+  border: #222 solid 1px;
+  border-radius: 0.8em;
+  padding: 2em 2.5em;
+  margin: 2em auto 1.5em auto;
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card h1 {
+  margin-top: 0;
+  font-size: 2em;
+  color: #222;
+}
+.card p {
+  color: #444;
+  font-size: 1.1em;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .card {
+    padding: 1em 1em;
+    max-width: 95vw;
+  }
+  .card h1 {
+    font-size: 1.3em;
+  }
+  .card p {
+    font-size: 1em;
+  }
+}
+/* Responsive Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #222;
+  color: #fff;
+  padding: 0.5em 1.5em;
+}
+.navbar-brand {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+.navbar-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.navbar-links li a:hover {
+  color: #ffb300;
+}
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  background: none !important;
+  color: inherit !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  gap: 0.3em;
+}
+.navbar-toggle .bar {
+  width: 100%;
+  height: 0.22em;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 700px) {
+  button {
+    padding: 0.6em 1.2em;
+    font-size: 0.9em;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 3.5em;
+    right: 1.5em;
+    background: #222;
+    flex-direction: column;
+    width: 10em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 0.5em;
+    z-index: 2000;
+  }
+  .navbar-links.active {
+    display: flex;
+  }
+  .navbar-toggle {
+    display: flex !important;
+    z-index: 2100;
+  }
+}
